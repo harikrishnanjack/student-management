@@ -1,0 +1,59 @@
+<mat-toolbar color="primary" class="bg-blue-500">
+  <div class="container mx-auto">
+    <div class="flex justify-between items-center py-4">
+      <div>
+        <h1
+          class="text-white text-xs font-semibold cursor-pointer"
+          (click)="navigateToHome()"
+        >
+          Student Management
+        </h1>
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <a class="text-white cursor-pointer" (click)="navigateToHome()">Home</a>
+        <a class="text-white cursor-pointer" [routerLink]="['add-student']"
+          >Add Student</a
+        >
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <button
+          mat-mini-fab
+          aria-label="Example icon button with a delete icon"
+          (click)="onLogout()"
+        >
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+      <div class="md:hidden flex space-x-4">
+        <button class="text-white" (click)="toggleMobileMenu()">
+          <i class="material-icons">menu</i>
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="showMobileMenu"
+      class="md:hidden flex flex-col mt-[81px] bg-blue-100 rounded-lg relative z-10"
+    >
+      <a
+        class="block text-blue-900 p-3 cursor-pointer"
+        (click)="navigateToHome()"
+        >Home</a
+      >
+      <a
+        class="block text-blue-900 p-3 cursor-pointer"
+        [routerLink]="['add-student']"
+        >Add Student</a
+      >
+      <a class="block text-blue-900 p-3 cursor-pointer" (click)="onLogout()"
+        >Logout</a
+      >
+      <button
+        *ngIf="showMobileMenu"
+        class="text-blue-700 absolute top-5 right-5"
+        (click)="toggleMobileMenu()"
+      >
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

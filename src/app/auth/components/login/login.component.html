@@ -1,0 +1,43 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+  <mat-card class="p-6 w-full sm:w-96">
+    <h2 class="text-2xl text-center font-semibold mb-4">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="w-full">
+        <input
+          matInput
+          placeholder="Username"
+          formControlName="username"
+          name="username"
+        />
+        <mat-error
+          *ngIf="
+            loginForm.get('username')?.invalid ||
+            loginForm.get('username')?.touched
+          "
+        >
+          Username is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full mt-4">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          name="password"
+        />
+        <mat-error
+          *ngIf="
+            loginForm.get('password')?.invalid ||
+            loginForm.get('password')?.touched
+          "
+        >
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="w-full mt-4">
+        Login
+      </button>
+    </form>
+  </mat-card>
+</div>

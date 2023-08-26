@@ -1,0 +1,107 @@
+<div class="container mx-auto p-6">
+  <div class="text-2xl flex gap-2 font-semibold mb-4">
+    <mat-form-field>
+      <mat-label>Primary Or Secondary</mat-label>
+      <mat-select [(ngModel)]="filterType" (ngModelChange)="filterData()">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="secondary">Secondary</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <mat-select [(ngModel)]="filterYear" (ngModelChange)="filterData()">
+        <mat-option value="2021">2021</mat-option>
+        <mat-option value="2022">2022</mat-option>
+        <mat-option value="2023">2023</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.editing; else editCell">{{
+          row.name
+        }}</ng-container>
+        <ng-template #editCell>
+          <input matInput [(ngModel)]="row.name" />
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.editing; else editCell">{{
+          row.age
+        }}</ng-container>
+        <ng-template #editCell>
+          <input [(ngModel)]="row.age" />
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="class">
+      <mat-header-cell *matHeaderCellDef>Class</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.editing; else editCell">{{
+          row.class
+        }}</ng-container>
+        <ng-template #editCell>
+          <input [(ngModel)]="row.class" />
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="division">
+      <mat-header-cell *matHeaderCellDef>Division</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.editing; else editCell">{{
+          row.division
+        }}</ng-container>
+        <ng-template #editCell>
+          <input [(ngModel)]="row.division" />
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="profilephoto">
+      <mat-header-cell *matHeaderCellDef>Profile Photo</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.editing; else editCell">
+          <img [src]="row.profilephoto" alt="Profile Photo" width="50" />
+        </ng-container>
+        <ng-template #editCell>
+          <input [(ngModel)]="row.profilephoto" />
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!row.editing; else editActions">
+          <button mat-icon-button (click)="startEdit(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </ng-container>
+        <ng-template #editActions>
+          <button mat-icon-button (click)="saveEdit(row)">
+            <mat-icon>done</mat-icon>
+          </button>
+          <button mat-icon-button (click)="cancelEdit(row)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </ng-template>
+        <button mat-mini-fab color="accent" (click)="openDialog(row.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button class="ml-2" (click)="navigateToView(row.id)">View</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>

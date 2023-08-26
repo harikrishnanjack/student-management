@@ -1,0 +1,46 @@
+<div class="p-6">
+  <h2 class="text-2xl font-semibold mb-4">Student Registration</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="w-full">
+      <input matInput placeholder="Name" formControlName="name" />
+      <mat-error *ngIf="registrationForm.get('name')?.hasError('required')"
+        >Name is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <input matInput placeholder="Age" formControlName="age" />
+      <mat-error *ngIf="registrationForm.get('age')?.hasError('required')"
+        >Age is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Class</mat-label>
+      <mat-select formControlName="classes">
+        <mat-option *ngFor="let c of classes" [value]="c">{{ c }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Division</mat-label>
+      <mat-select formControlName="division">
+        <mat-option *ngFor="let d of divisions" [value]="d">{{ d }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input matInput placeholder="Profile Url" formControlName="url" />
+      <mat-error *ngIf="registrationForm.get('url')?.hasError('required')"
+        >Url is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Year</mat-label>
+      <mat-select formControlName="year">
+        <mat-option *ngFor="let y of years" [value]="y">{{ y }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Register</button>
+  </form>
+</div>
